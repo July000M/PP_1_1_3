@@ -11,7 +11,7 @@ public class Util {
     private static final String PASSWORD = "root";
 
     private Util() {
-        throw new IllegalStateException("k class");
+        throw new IllegalStateException("Utility class");
     }
 
 
