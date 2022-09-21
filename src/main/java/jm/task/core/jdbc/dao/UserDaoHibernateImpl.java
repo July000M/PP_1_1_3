@@ -5,6 +5,7 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -41,7 +42,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(new User(name, lastName, age));
             session.getTransaction().commit();
@@ -60,12 +61,13 @@ public class UserDaoHibernateImpl implements UserDao {
         }
     }
 
+
     @Override
     public List<User> getAllUsers() {
         List<User> userList;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            userList = session.createQuery("from User", User.class)
+            userList = session.createQuery("from User", User.class)//класс в кот маппим
                     .list();
             session.getTransaction().commit();
 
