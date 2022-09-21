@@ -22,6 +22,7 @@ public class UserDaoJDBCImpl implements UserDao {
     private static final String DROP_USERS_TABLE = "DROP TABLE IF EXISTS users;";
     private static final String CLEAN_USERS_TABLE = "TRUNCATE TABLE users;";
     private static final String GET_USER = "SELECT * FROM users;";
+    private static final String SELECT_USER = "SELECT * FROM users;";
 
     public void createUsersTable() {
         try (Connection connection = Util.getConnection();
@@ -50,9 +51,9 @@ public class UserDaoJDBCImpl implements UserDao {
 
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
-             PreparedStatement allUsers = connection.prepareStatement("SELECT * FROM users");) {
+             PreparedStatement allUsers = connection.prepareStatement(SELECT_USER)) {
 
-            preparedStatement.setString(1, name);
+            preparedStatement.setString(1, name);//заполняем значения(?) запроса
             preparedStatement.setString(2, lastName);
             preparedStatement.setInt(3, age);
             preparedStatement.executeUpdate();
@@ -77,26 +78,13 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        List<User> users = new ArrayList<>();
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER);
-             PreparedStatement allUsers = connection.prepareStatement("SELECT * FROM users");) {
+             PreparedStatement preparedStatement = connection.prepareStatement(REMOVE_USER);) {
 
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
 
-
-            ResultSet rs = allUsers.executeQuery();
-
-            while (rs.next()) {
-                id = rs.getInt("id");
-                String name = rs.getString("name");
-                String lastName = rs.getString("lastName");
-                byte age = rs.getByte("age");
-
-                users.add(new User(name, lastName, age));
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
