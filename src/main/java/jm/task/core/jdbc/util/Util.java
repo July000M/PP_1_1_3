@@ -38,7 +38,7 @@ public class Util {
                 settings.put(Environment.SHOW_SQL, "true");
 //                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");//при getCurrentSession
                 settings.put(Environment.HBM2DDL_AUTO, "update");
-//                settings.put(Environment.PHYSICAL_NAMING_STRATEGY, "");
+//                settings.put(Environment.PHYSICAL_NAMING_STRATEGY, "";
 
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
