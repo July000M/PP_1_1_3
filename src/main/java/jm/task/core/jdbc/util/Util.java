@@ -20,7 +20,7 @@ public class Util {
 
 
         try {
-            connection = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
+            connection = DriverManager.getConnection(HOST, USERNAME, PASSWORD);// создаем объект соединения
 
         } catch (SQLException e) {
             System.out.println("Ошибка в getConnection");
