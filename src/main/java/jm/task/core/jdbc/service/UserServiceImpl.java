@@ -8,11 +8,10 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    UserDao userDao = new UserDaoHibernateImpl();
+    private static final UserDao userDao = new UserDaoHibernateImpl();
 
     public void createUsersTable() {
         userDao.createUsersTable();
-
     }
 
     public void dropUsersTable() {
@@ -25,7 +24,6 @@ public class UserServiceImpl implements UserService {
 
     public void removeUserById(long id) {
         userDao.removeUserById(id);
-
     }
 
     public List<User> getAllUsers() {

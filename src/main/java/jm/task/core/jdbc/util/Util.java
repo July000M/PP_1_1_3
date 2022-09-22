@@ -29,7 +29,6 @@ public class Util {
             try {
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
-
                 settings.put(Environment.DRIVER, DRIVER);
                 settings.put(Environment.URL, URL);
                 settings.put(Environment.USER, USERNAME);
@@ -38,8 +37,6 @@ public class Util {
                 settings.put(Environment.SHOW_SQL, "true");
 //                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");//при getCurrentSession
                 settings.put(Environment.HBM2DDL_AUTO, "update");
-//                settings.put(Environment.PHYSICAL_NAMING_STRATEGY, "";
-
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
 
@@ -52,10 +49,6 @@ public class Util {
                 e.printStackTrace();
             }
         }
-
         return sessionFactory;
-
-
     }
-
 }
