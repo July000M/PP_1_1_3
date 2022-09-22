@@ -10,23 +10,14 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
-    private Util() {
-        throw new IllegalStateException("Utility class");
-    }
-
-
     public static Connection getConnection() {
         Connection connection = null;
-
-
         try {
             connection = DriverManager.getConnection(HOST, USERNAME, PASSWORD);// создаем объект соединения
-
         } catch (SQLException e) {
             System.out.println("Ошибка в getConnection");
             e.printStackTrace();
         }
         return connection;
     }
-
 }
